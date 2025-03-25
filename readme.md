@@ -24,6 +24,9 @@ python -m venv venv
 ```
 venv\Scripts\Activate
 (or on Mac): source venv/bin/activate
+
+In case you get an error (only Windows):
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted -Force
 ```
 
 <h3>4. Install libraries</h3>
