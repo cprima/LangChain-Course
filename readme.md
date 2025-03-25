@@ -47,14 +47,15 @@ While making this course, I used the following sources:
 <h3>Chapter 1</h3>
 
 <ul>
-<li>https://www.ibm.com/think/topics/artificial-intelligence</li>
+<li>https://arxiv.org/pdf/1706.03762</li>
 </ul>
 
 <h3>Chapter 2</h3>
 
 <ul>
-<li>https://arxiv.org/pdf/1706.03762</li>
+
 <li>https://python.langchain.com/docs/introduction/</li>
+<li>https://python.langchain.com/docs/concepts/architecture/</li>
 </ul>
 
 <h3>Chapter 3</h3>
