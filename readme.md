@@ -66,6 +66,7 @@ While making this course, I used the following sources:
 <ul>
 <li>https://python.langchain.com/docs/integrations/chat/</li>
 <li>https://python.langchain.com/docs/concepts/chat_models/</li>
+<li>https://python.langchain.com/docs/concepts/tokens/</li>
 <li>https://docs.streamlit.io/develop/tutorials/chat-and-llm-apps/build-conversational-apps</li>
 </ul>
 
