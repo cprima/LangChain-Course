@@ -56,6 +56,9 @@ While making this course, I used the following sources:
 
 <li>https://python.langchain.com/docs/introduction/</li>
 <li>https://python.langchain.com/docs/concepts/architecture/</li>
+<li>https://python.langchain.com/docs/integrations/providers/openai/</li>
+<li>https://python.langchain.com/docs/integrations/providers/anthropic/</li>
+<li>https://python.langchain.com/docs/integrations/providers/ollama/</li>
 </ul>
 
 <h3>Chapter 3</h3>
