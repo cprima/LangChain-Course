@@ -1,8 +1,9 @@
+import os
 from dotenv import load_dotenv
 
 load_dotenv()
 
-from langchain_openai import ChatOpenAI
+from langchain.chat_models import init_chat_model
 
 import streamlit as st
 
@@ -12,10 +13,10 @@ prompt = st.chat_input("Ask me anything..")
 
 if prompt:
 
-    llm = ChatOpenAI(
-        model="gpt-4o",
-        temperature=0,
-        max_completion_tokens=1000
+    llm = init_chat_model(
+        os.getenv("CHAT_MODEL"), 
+        model_provider = os.getenv("MODEL_PROVIDER"),
+        temperature = 1.4
     )
 
     output = llm.invoke(f"{prompt}")
