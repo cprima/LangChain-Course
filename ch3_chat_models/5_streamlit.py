@@ -16,7 +16,7 @@ if prompt:
     llm = init_chat_model(
         os.getenv("CHAT_MODEL"), 
         model_provider = os.getenv("MODEL_PROVIDER"),
-        temperature = 1.4
+        temperature = 0.7
     )
 
     output = llm.invoke(f"{prompt}")
