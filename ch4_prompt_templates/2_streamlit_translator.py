@@ -1,9 +1,10 @@
 import os
 
 from dotenv import load_dotenv
-from languages import *
 
 load_dotenv()
+
+from languages import *
 
 from langchain.chat_models import init_chat_model
 from langchain_core.prompts import PromptTemplate
@@ -23,7 +24,7 @@ st.title("Language Translation from English")
 
 source_text = st.text_area("Text to translate:")
 target_language = st.selectbox("Target language:", languages)
-translate = st.button("Translate")
+translate = st.button("Translate Now!")
 
 if translate:
 

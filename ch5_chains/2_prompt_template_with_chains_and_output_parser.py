@@ -16,8 +16,8 @@ llm = init_chat_model(
     temperature = 0
 )
 
-chain = example_prompt | llm
+chain = example_prompt | llm | StrOutputParser()
 
 result = chain.invoke({"language":"French","text_to_translate":"Flower"})
 
-print(result.content)
+print(result)

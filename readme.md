@@ -75,21 +75,22 @@ While making this course, I used the following sources:
 
 <ul>
 <li>https://python.langchain.com/docs/concepts/prompt_templates/</li>
-<li>https://python.langchain.com/docs/how_to/sequence/</li>
 </ul>
 
 <h3>Chapter 5</h3>
 
 <ul>
+<li>https://python.langchain.com/docs/how_to/sequence/</li>
 <li>https://python.langchain.com/docs/concepts/lcel/</li>
+<li>https://python.langchain.com/docs/concepts/output_parsers/</li>
 
 </ul>
 
 <h3>Chapter 6</h3>
 
 <ul>
+<li>https://python.langchain.com/docs/how_to/structured_output/</li>
 <li>https://python.langchain.com/docs/concepts/structured_outputs/</li>
-
 </ul>
 
 <h3>Chapter 7</h3>

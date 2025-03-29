@@ -7,8 +7,7 @@ from langchain.chat_models import init_chat_model
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
-example_prompt = PromptTemplate.from_template("Translate the following text from English to {language}: {text_to_translate}")
-
+example_prompt = PromptTemplate.from_template("Write a story about: {subject}")
 
 llm = init_chat_model(
     os.getenv("CHAT_MODEL"), 
@@ -16,8 +15,7 @@ llm = init_chat_model(
     temperature = 0
 )
 
-chain = example_prompt | llm
+chain = example_prompt | llm | StrOutputParser()
 
-result = chain.invoke({"language":"French","text_to_translate":"Flower"})
-
-print(result.content)
+for chunk in chain.stream("goldfish"):
+    print(chunk, end="", flush=True)

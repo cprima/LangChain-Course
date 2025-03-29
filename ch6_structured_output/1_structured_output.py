@@ -1,14 +1,15 @@
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 from langchain_community.document_loaders import WebBaseLoader
 from langchain_core.prompts import PromptTemplate
 
 from pydantic import BaseModel, Field
 from typing import List
 
-from dotenv import load_dotenv
-
-load_dotenv()
-
-from langchain_openai import ChatOpenAI
+from langchain.chat_models import init_chat_model
 
 class Person(BaseModel):
     name: str
@@ -32,10 +33,12 @@ persons for the following person: {person_info}
 Don't make things up, and only use the information which is provided to you
 """)
                                               
-llm = ChatOpenAI(
-    model="gpt-4o",
-    temperature=0
+llm = init_chat_model(
+    os.getenv("CHAT_MODEL"), 
+    model_provider = os.getenv("MODEL_PROVIDER"),
+    temperature = 0
 )
+
 
 llm_with_tools = llm.bind_tools([Person])
 
