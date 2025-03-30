@@ -5,16 +5,7 @@ load_dotenv()
 
 from langchain_community.document_loaders import WebBaseLoader
 from langchain_core.prompts import PromptTemplate
-
-from pydantic import BaseModel, Field
-from typing import List
-
 from langchain.chat_models import init_chat_model
-
-class Person(BaseModel):
-    name: str
-    occupation: str
-    related_persons: list[str]
 
 
 person_info = """
@@ -27,12 +18,13 @@ Born in the Province of Massachusetts Bay, Franklin became a successful newspape
 
 prompt = PromptTemplate.from_template(
 """
-"Provide the name of the person (first + last name), the occupation and a list of related
-persons for the following person: {person_info}
+"Provide the name of the person (first + last name), the occupation 
+and the amount of children from the following person: {person_info}
 
 Don't make things up, and only use the information which is provided to you
 """)
-                                              
+
+
 llm = init_chat_model(
     os.getenv("CHAT_MODEL"), 
     model_provider = os.getenv("MODEL_PROVIDER"),
@@ -40,10 +32,49 @@ llm = init_chat_model(
 )
 
 
-llm_with_tools = llm.bind_tools([Person])
+json_schema = {
+    "title": "person",
+    "description": "return information about a person",
+    "type": "object",
+    "properties": {
+        "first_name": {
+            "type": "string",
+            "description": "the first name of the person",
+        },
+        "last_name": {
+            "type": "string",
+            "description": "the last name of the person",
+        },
+        "occupation": {
+            "type": "array",
+            "items":{
+                    "type": "string"
+                    },
 
-chain = prompt | llm_with_tools
+        "description": "the person's occupation",
+        },
+        "number_of_children":{
+            "type":"integer",
+            "description": "amount of children",
+        }
+    },
+    "required": ["first_name", "last_name","occupation","number_of_children"],
+}
+
+
+llm_with_structured_output = llm.with_structured_output(json_schema)
+
+chain = prompt | llm_with_structured_output
 
 output = chain.invoke({"person_info":person_info})
 
-print(output.tool_calls[0]["args"])
+print(output)
+
+print("===============================")
+print("PARSED OUTPUT =================")
+print("===============================")
+
+print(f"First name: {output['first_name']}")
+print(f"Last name: {output['last_name']}")
+print(f"Occupation: {output['occupation']}")
+print(f"Amount of children: {output['number_of_children']}")
