@@ -3,10 +3,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from langchain_community.document_loaders import WebBaseLoader
 from langchain_core.prompts import PromptTemplate
 from langchain.chat_models import init_chat_model
-
 
 person_info = """
 Benjamin Franklin (January 17, 1706 [O.S. January 6, 1705][Note 1] - April 17, 1790) was an American polymath: a writer, scientist, inventor, statesman, diplomat, printer, publisher and political philosopher.[1] Among the most influential intellectuals of his time, Franklin was one of the Founding Fathers of the United States; a drafter and signer of the Declaration of Independence; and the first postmaster general.[2]

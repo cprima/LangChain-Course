@@ -3,22 +3,21 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from langchain_community.document_loaders import WebBaseLoader
 from langchain_core.prompts import PromptTemplate
-from langchain_core.output_parsers import StrOutputParser
+from langchain.chat_models import init_chat_model
 
 from pydantic import BaseModel, Field
 from typing import List, Optional
 
-from langchain.chat_models import init_chat_model
 
 
 class Person(BaseModel):
     """Provide structured information about a person"""
 
-    name: str = Field(description="The person's name")
+    first_name: str = Field(description="The person's first name")
+    last_name: str = Field(description="The person's last name")
     occupation: str = Field(description="The person's occupation")
-    number_of_children: Optional[int] = Field(description="How many children the person has")
+    number_of_children: Optional[int] = Field(description="Amount of kids")
     related_persons: List[str] = Field(description="A list of related persons")
 
 
@@ -46,10 +45,16 @@ llm = init_chat_model(
 )
 
 
-llm_with_structured_output = llm.with_structured_output([Person])
+llm_with_structured_output = llm.with_structured_output(Person)
 
 chain = prompt | llm_with_structured_output
 
 output = chain.invoke({"person_info":person_info})
 
 print(output)
+
+print(f"First name: {output.first_name}")
+print(f"Last name: {output.last_name}")
+print(f"Occupation: {output.occupation}")
+print(f"Amount of children: {output.number_of_children}")
+print(f"Related persons: {output.related_persons}")
