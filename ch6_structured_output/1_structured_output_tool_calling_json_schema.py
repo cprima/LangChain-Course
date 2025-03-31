@@ -51,7 +51,7 @@ json_schema = {
                     "type": "string"
                     },
 
-        "description": "the person's occupation",
+            "description": "the person's occupation",
         },
         "number_of_children":{
             "type":"integer",

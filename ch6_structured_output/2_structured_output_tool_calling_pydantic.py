@@ -14,10 +14,11 @@ from langchain.chat_models import init_chat_model
 
 
 class Person(BaseModel):
-    """A class to derscribe the fields of the user object"""
+    """Provide structured information about a person"""
 
     name: str = Field(description="The person's name")
     occupation: str = Field(description="The person's occupation")
+    number_of_children: int = Field(description="How many children the person has")
     related_persons: List[str] = Field(description="A list of related persons")
 
 
@@ -30,8 +31,10 @@ Born in the Province of Massachusetts Bay, Franklin became a successful newspape
 
 prompt = PromptTemplate.from_template(
 """
-"Provide the name of the person (first + last name), the occupation and a list of related
-persons for the following person: {person_info}
+"Provide the name of the person (first + last name), the amount of children,
+ the occupation and a list of related persons for the following person: 
+ 
+ {person_info}
 
 Don't make things up, and only use the information which is provided to you
 """)
