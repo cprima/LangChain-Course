@@ -22,7 +22,7 @@ class Classification(BaseModel):
 
 
 review = """
-My fies were cold and there was an insect in my burger. Never coming here again!!!!!
+My fries were cold and there was an insect in my burger. Never coming here again!!!!!
 """
 
 classification_prompt = PromptTemplate.from_template(
