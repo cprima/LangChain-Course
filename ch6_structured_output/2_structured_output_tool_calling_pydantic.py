@@ -52,4 +52,4 @@ chain = prompt | llm_with_structured_output
 
 output = chain.invoke({"person_info":person_info})
 
-print(output.tool_calls[0]["args"])
+print(output)
