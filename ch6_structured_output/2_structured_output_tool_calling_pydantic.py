@@ -8,7 +8,7 @@ from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
 from pydantic import BaseModel, Field
-from typing import List
+from typing import List, Optional
 
 from langchain.chat_models import init_chat_model
 
@@ -18,7 +18,7 @@ class Person(BaseModel):
 
     name: str = Field(description="The person's name")
     occupation: str = Field(description="The person's occupation")
-    number_of_children: int = Field(description="How many children the person has")
+    number_of_children: Optional[int] = Field(description="How many children the person has")
     related_persons: List[str] = Field(description="A list of related persons")
 
 
@@ -31,7 +31,7 @@ Born in the Province of Massachusetts Bay, Franklin became a successful newspape
 
 prompt = PromptTemplate.from_template(
 """
-"Provide the name of the person (first + last name), the amount of children,
+"Provide the name of the person (first + last name), the amount of children (in case provided),
  the occupation and a list of related persons for the following person: 
  
  {person_info}
@@ -48,7 +48,7 @@ llm = init_chat_model(
 
 llm_with_structured_output = llm.with_structured_output([Person])
 
-chain = prompt | llm_with_structured_output | StrOutputParser()
+chain = prompt | llm_with_structured_output
 
 output = chain.invoke({"person_info":person_info})
 
