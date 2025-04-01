@@ -1,4 +1,3 @@
-
 # 🧪 Test Framework for LangChain-Course
 
 This test suite verifies selected LangChain course scripts using real LLM backends, configured via `.env.test.*` files. It checks token usage and response behavior across providers.
@@ -13,9 +12,9 @@ Each script is executed via `subprocess.run(...)`, preserving original behavior.
 
 This approach ensures:
 
-- Authentic execution, consistent with course intent
-- Isolation between tests and lesson logic
-- Compatibility with real-world APIs and environments
+- Authentic execution, consistent with course intent  
+- Isolation between tests and lesson logic  
+- Compatibility with real-world APIs and environments  
 
 Refactoring scripts into importable functions is intentionally avoided to remain aligned with the educational source.
 
@@ -26,8 +25,13 @@ Refactoring scripts into importable functions is intentionally avoided to remain
 ```
 tests/
 ├── ch3/
-│   └── lesson5/
-│       └── test_token_consumption.py
+│   ├── lesson3/
+│   │   └── test_model_parameters.py  ← full test implemented
+│   └── lesson4/
+│       └── test_token_consumption.py ← full test implemented
+├── chX/
+│   └── lessonY/
+│       └── test_<script>.py          ← generated, minimal exit-code checks or skipped
 ├── support/
 │   └── constants.py
 ├── conftest.py
@@ -90,6 +94,22 @@ LLM_TIMEOUTS = {
 
 ---
 
+## 🚧 Status of Coverage
+
+Due to time constraints, **only two tests** are implemented with complete logic and output assertions:
+
+- `test_model_parameters.py`
+- `test_token_consumption.py`
+
+All other test files were generated automatically. These currently:
+
+- Only verify the script exits cleanly, **or**
+- Are explicitly skipped (e.g., for Streamlit apps)
+
+This structure provides a scaffold for future test expansion while keeping existing test coverage maintainable.
+
+---
+
 ## 📦 Git Hygiene
 
 Git excludes:
@@ -108,7 +128,7 @@ Only the example file is tracked:
 
 ## 🧼 Notes
 
-- Tests do not import or refactor lesson scripts.
-- Tests run scripts in subprocesses using real `.env` context.
-- Tests are skipped if required `.env.test.*` files are missing.
-```
+- Tests do not import or refactor lesson scripts  
+- Tests run scripts in subprocesses using real `.env` context  
+- Tests are skipped if required `.env.test.*` files are missing  
+- Streamlit-based scripts are explicitly skipped with a reason  
